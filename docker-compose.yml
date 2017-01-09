@@ -1,0 +1,30 @@
+version: '2'
+services:
+    webapp:
+        image: webapp
+        container_name: pirat-web
+        ports:
+            - "80:80"
+        links:
+            - db
+        volumes:
+            - /home/tszymanek/Dokumenty/pirat:/var/www/html/webapp
+        working_dir: /var/www/html/webapp
+    db:
+        image: mysql:5.7
+        container_name: pirat-db
+        hostname: pirat-db
+        ports:
+            - "3306:3306"
+        volumes:
+            - /home/tszymanek/mysql:/var/lib/mysql
+            - /home/tszymanek/docker/mysql/conf.d:/etc/mysql/conf.d
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: pirat
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+    node:
+        image: node:boron
+        volumes:
+            - /home/tszymanek/Dokumenty/pirat/app/src/AppBundle/Resurces/assets/:/var/www/html/
