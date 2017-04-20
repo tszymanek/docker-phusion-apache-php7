@@ -10,7 +10,7 @@ services:
         links:
             - mysql
         volumes:
-            - /home/tszymanek/Dokumenty/ddd-shop:/var/www/html/webapp
+            - /home/kochan/dev/fedex/webapp:/var/www/html/webapp
         working_dir: /var/www/html/webapp
     mysql:
         image: mysql:5.6
@@ -19,7 +19,7 @@ services:
         ports:
             - "3306:3306"
         volumes:
-            - /home/tszymanek/mysql:/var/lib/mysql
+            - ./volumes/mysql:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: root
