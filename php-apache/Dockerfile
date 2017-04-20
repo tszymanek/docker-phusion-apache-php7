@@ -3,7 +3,7 @@
 # to `latest`! See
 # https://github.com/phusion/baseimage-docker/blob/master/Changelog.md
 # for a list of version numbers.
-FROM phusion/baseimage:0.9.18
+FROM phusion/baseimage:0.9.19
 
 MAINTAINER Tomasz Szymanek <tszymanek@o2.pl>
 
@@ -42,7 +42,7 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
 	nano \
 	acl
 
-# Apache 2.4, PHP 7 and Installation
+# Apache 2.4, PHP 7.1 and Installation
 RUN add-apt-repository -y ppa:ondrej/apache2
 RUN add-apt-repository -y ppa:ondrej/php
 RUN apt-get update
@@ -98,8 +98,8 @@ RUN mkdir -p $COMPOSER_HOME/cache \
     && chown 1000:1000 -R $COMPOSER_HOME
 
 # MongoDB Driver
-RUN pecl install mongodb \
-    && echo "extension=mongo.so" > /etc/php/7.1/mods-available/mongo.ini
+# RUN pecl install mongodb \
+    # && echo "extension=mongo.so" > /etc/php/7.1/mods-available/mongo.ini
 
 RUN mkdir -p 			/var/www/html
 
