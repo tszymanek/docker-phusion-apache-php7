@@ -32,7 +32,6 @@ CMD ["/sbin/my_init"]
 RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get upgrade -y -o Dpkg::Options::="--force-confold"
 
 RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
-	vim \
 	curl \
 	wget \
 	build-essential \
@@ -44,13 +43,13 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
 
 # Apache 2.4, PHP 7.1 and Installation
 RUN add-apt-repository -y ppa:ondrej/apache2
-RUN add-apt-repository -y ppa:ondrej/php
+RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 RUN apt-get update
 
 # Apache 2.4
 RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y \
 	apache2 \ 
-	libapache2-mod-php7.1
+	libapache2-mod-php5.6
 
 RUN service apache2 stop
 RUN a2enmod headers && a2enmod rewrite
@@ -67,26 +66,27 @@ ENV APACHE_RUN_DIR /var/run/apache2
 # PHP 7
 RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y \ 
 	--force-yes \
-	php7.1-cli \
-	php7.1-common \
-	php7.1-curl \
-	php7.1-dev \
-	php7.1-intl \
-	php7.1-json \
-	php7.1-mysql \
-	php7.1-pgsql \
-	php7.1-xml \
-	php7.1-zip \
-	php-pear \
+	php5.6-cli \
+	php5.6-common \
+	php5.6-curl \
+	php5.6-dev \
+	php5.6-intl \
+	php5.6-json \
+	php5.6-mysql \
+	php5.6-pgsql \
+	php5.6-xml \
+	php5.6-zip \
+#	php-pear
+    php-pear \
 	php-xdebug
-
+#
 # Xdebug
-RUN sed -i "s/zend_extension=xdebug.so/zend_extension=\/usr\/lib\/php\/20160303\/xdebug.so/" /etc/php/7.1/mods-available/xdebug.ini \
+RUN sed -i "s/zend_extension=xdebug.so/zend_extension=\/usr\/lib\/php\/220131226\/xdebug.so/" /etc/php/5.6/mods-available/xdebug.ini \
 	&& echo "xdebug.remote_enable=1\n \
 			 xdebug.remote_port=9000\n \
 			 xdebug.idekey=PHPSTORM\n \
 			 xdebug.remote_connect_back = 1" \
-			 >> /etc/php/7.1/mods-available/xdebug.ini
+			 >> /etc/php/5.6/mods-available/xdebug.ini
 
 # Composer
 ENV COMPOSER_HOME /var/www/.composer
