@@ -1,2 +1,2 @@
 #!/bin/bash
-docker exec -u=docker -it pirat-web bash
+docker exec -u=docker -it shop-web bash

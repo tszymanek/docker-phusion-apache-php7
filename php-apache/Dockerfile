@@ -78,10 +78,10 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y \
 	php5.6-zip \
 #	php-pear
     php-pear \
-	php-xdebug
+	php5.6-xdebug
 #
 # Xdebug
-RUN sed -i "s/zend_extension=xdebug.so/zend_extension=\/usr\/lib\/php\/220131226\/xdebug.so/" /etc/php/5.6/mods-available/xdebug.ini \
+RUN sed -i "s/zend_extension=xdebug.so/zend_extension=\/usr\/lib\/php\/20131226\/xdebug.so/" /etc/php/5.6/mods-available/xdebug.ini \
 	&& echo "xdebug.remote_enable=1\n \
 			 xdebug.remote_port=9000\n \
 			 xdebug.idekey=PHPSTORM\n \

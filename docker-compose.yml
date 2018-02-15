@@ -10,7 +10,7 @@ services:
         links:
             - mysql
         volumes:
-            - /home/tszymanek/Fedex:/var/www/html/webapp
+            - /home/tszymanek/projects/tmev12:/var/www/html/webapp
         working_dir: /var/www/html/webapp
     mysql:
         image: mysql:5.6
