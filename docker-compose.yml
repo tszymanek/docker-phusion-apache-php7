@@ -3,26 +3,26 @@ services:
     webapp:
         build: ./php-apache
         image: webapp
-        container_name: shop-web
-        hostname: shop-web
+        container_name: pykniem-web
+        hostname: pykniem-web
         ports:
             - "80:80"
         links:
             - mysql
         volumes:
-            - /home/kochan/dev/fedex/webapp:/var/www/html/webapp
+            - /home/tszymanek/projects/pykniem:/var/www/html/webapp
         working_dir: /var/www/html/webapp
     mysql:
-        image: mysql:5.6
-        container_name: shop-db
-        hostname: shop-db
+        image: mysql:5.7
+        container_name: pykniem-db
+        hostname: pykniem-db
         ports:
             - "3306:3306"
         volumes:
             - ./volumes/mysql:/var/lib/mysql
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: root
+            MYSQL_DATABASE: pykniem
             MYSQL_USER: root
             MYSQL_PASSWORD: root
     # mongo:
